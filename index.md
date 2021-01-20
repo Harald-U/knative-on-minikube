@@ -32,15 +32,15 @@ It has two distinct components, originally it were three. The third was called K
 * __Knative Serving__ is responsible for deploying and running containers, also networking and auto-scaling. Auto-scaling allows scale to zero and is probably the main reason why Knative is referred to as Serverless platform.
 * __Knative Eventing__ allows to connect Knative services (deployed by Knative Serving) or other Kubernetes deployments with events or streams of events.
 
-This workshop will **focus on Knative Serving** and will cover the following topics:
+This workshop will **focus on Knative Serving** and will cover the following topics, work through them in sequence:
 
-1. Prerequisites (access to a Kubernetes cluster, work environment, etc.)
-1. Installing Knative
-1. Deploying an example app as Knative Service
-1. Creating a Knative Revision
-1. Traffic Management
-1. Auto-Scaling
-1. Debugging Tips
+- [1 - Setup the work environment](workshop/1-Prereqs.md)
+- [2 - Install Knative](workshop/2-InstallKnative.md)
+- [3 - Deploy a Knative Service](workshop/3-DeployKnativeService.md)
+- [4 - Create a Knative Revision](workshop/4-Revision.md)
+- [5 - Traffic Management](workshop/5-TrafficManagement.md)
+- [6 - Auto-Scaling](workshop/6-Scaling.md)
+- [7 - Debugging Tips](workshop/7-Debugging.md)
 
 To complete this workshop, basic understanding of Kubernetes/OpenShift and application deployment on Kubernetes is instrumental!
 
