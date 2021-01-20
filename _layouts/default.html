@@ -15,6 +15,7 @@
         <h1>{{ site.title | default: site.github.repository_name }}</h1>
         <p>{{ site.description | default: site.github.project_tagline }}</p>
 
+        <h3>Content:</h3>
         <table>
           {% for nav in site.navigation %}
             {% if nav.url contains "://" %}
