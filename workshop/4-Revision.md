@@ -1,4 +1,4 @@
-# Knative Revisions
+# 4 - Knative Revisions
 
 A Knative Revision is a specific version of a code deployment. 
 
@@ -66,15 +66,15 @@ It also has a new revision name ('helloworld-v2'), if this does not change, Knat
    ```
    Output:
    ```
-   NAME            SERVICE      GENERATION   AGE   CONDITIONS   READY   REASON
-   helloworld-v2   helloworld   2            12m   3 OK / 4     True    
-   helloworld-v1   helloworld   1            12m   3 OK / 4     True    
+   NAME            SERVICE      TRAFFIC   TAGS   GENERATION   AGE    CONDITIONS   READY   REASON
+   helloworld-v2   helloworld   100%             2            104s   3 OK / 4     True    
+   helloworld-v1   helloworld                    1            98m    3 OK / 4     True    
    ```    
-   As you can see, both revisions are there but in the description of the Knative Service above you can see that only Revision 2 is currently used.
+   As you can see, both revisions are there but 100% of all traffic goes to generation (revision) 2.
    
    So how is this different from a typical Kubernetes rolling update? The difference is that both revisions are available and we will see in the next section how to make use of that.
    
 
 ---
 
-__Continue with the next part [Knative Traffic Management](5-TrafficManagement.md)__
+__Continue with the next part [5 - Knative Traffic Management](5-TrafficManagement.md)__

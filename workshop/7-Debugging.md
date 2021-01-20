@@ -1,6 +1,6 @@
-# Knative Debugging Tips
+# 7 - Knative Debugging Tips
 
-There are new places to look for information as to why a Knative service doesn’t work. Here is a collection of helpful commands and examples.
+There are new places in your environment to look for information as to why a Knative service doesn’t work. Here is a collection of helpful commands and examples.
 
 1. Display the Knative service:
    ```
@@ -64,5 +64,7 @@ There are new places to look for information as to why a Knative service doesn�
          type: ResourcesAvailable
     ```       
     Here you can see in one of the status messages that we were under CPU pressure in the cluster. The pod was "unschedulable". 
+
+    ---
     
     There is more information on [Debugging issues with your application](https://knative.dev/docs/serving/debugging-application-issues/) on the Knative docs site.

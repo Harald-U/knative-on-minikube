@@ -1,4 +1,4 @@
-# Knative Auto-Scaling
+# 6 - Knative Auto-Scaling
 
 Scale to zero is an interesting feature but without additional tricks (like pre-started containers or pods, which aren't available in Knative) it can be annoying because users may have to wait until a new pod is started and ready to receive requests. Or it can lead to problems like time-outs in a microservices architecture if a scaled-to-zero service is called by another service and has to be started first and takes some time to start (e.g. traditional Java based service). 
 
@@ -32,25 +32,19 @@ spec:
 * `maxScale: "5"` will allow to start a maximum of 5 pods.
 * `target: "1"` limits every started pod to 1 concurrent request at a time, this is just to make it easier to demo. 
 
-You can also [scale based on CPU usage or number of requests](https://cloud.ibm.com/docs/containers?topic=containers-serverless-apps-knative#scale-cpu-vs-number-requests).
+You can also [scale based on CPU usage or number of requests](https://knative.dev/docs/serving/autoscaling/autoscaling-metrics/).
 
 1. Deploy as usual (`kubectl apply ...`) and test if it works (`curl ...`).
 
-1. Download the `hey` load generator tool into your IBM Cloud Shell session and make it executable:
-   ```
-   wget https://storage.googleapis.com/hey-release/hey_linux_amd64
-   mv hey_linux_amd64 hey
-   chmod +x hey
-   ```
-1. In the second IBM Cloud Shell session, watch the pods:
+1. In a second terminal session, watch the pods:
    ```
    watch kubectl get pod
    ```
    You should notice that 1 pod is running, and running longer than 60 seconds. This is the result of `minScale: "1"`. Scale to zero has been turned off.
    
-1. In the other IBM Cloud Shell session generate some load:
+1. In the first terminal session generate some load:
    ```
-   ./hey -z 30s -c 50 http://helloworld-....appdomain.cloud   
+   hey -z 30s -c 50 http://helloworld-....appdomain.cloud   
    ```
    Switch over to session 2 and watch 4 more pods being started.
    ```
@@ -64,29 +58,24 @@ You can also [scale based on CPU usage or number of requests](https://cloud.ibm.
 5. Check the output of the `hey`command, for example the histogram:
    ```
     Response time histogram:
-    0.009 [1]     |
-    0.035 [47400] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-    0.061 [9506]  |■■■■■■■■
-    0.087 [557]   |
-    0.113 [117]   |
-    0.139 [41]    |
-    0.165 [10]    |
-    0.191 [7]     |
-    0.217 [5]     |
-    0.244 [7]     |
-    0.270 [33]    |
+      0.002 [1]     |
+      0.039 [4079]  |■■■■■■■■■■■■■■■
+      0.077 [66]    |
+      0.114 [10744] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+      0.151 [320]   |■
+      0.189 [921]   |■■■
+      0.226 [841]   |■■■
+      0.263 [0]     |
+      0.301 [97]    |
+      0.338 [28]    |
+      0.375 [1]     |
+
    ```
-   None of the requests took much longer than a quarter of a second. Thats because one pod is always started and can take the initial brunt of the requests.
+   All of the requests took less than half a second. Thats because one pod is always started and can take the initial brunt of the requests.
   
 **This concludes the main part of the Knative workshop.**   
 
-The IBM Cloud documentation of Knative has a collection of [useful Knative Serving settings](https://cloud.ibm.com/docs/containers?topic=containers-serverless-apps-knative#knative-service-settings), including:
-
-* Scaling based on CPU or number of requests
-* Changing default container port
-* Creating private (cluster internal) only services
-etc.
-  
+ 
 ---
 
-__Continue with the last part [Knative Debugging Tips](7-Debugging.md)__
+__Continue with the last part [7 - Knative Debugging Tips](7-Debugging.md)__

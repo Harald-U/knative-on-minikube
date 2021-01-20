@@ -7,7 +7,7 @@ layout: default
 
 _This workshop is an adaptation of the [Knative Hands-on Workshop](https://harald-u.github.io/knative-handson-workshop/) I created for IBM._
 
-_The IBM Workshop uses preprovisioned Kubernetes or OpenShift clusters on the IBM Cloud based on IBM Cloud Kubernetes Service (IKS) or Red OpenShift on IBM Cloud._
+_The IBM Workshop uses preprovisioned Kubernetes or OpenShift clusters on the IBM Cloud based on IBM Cloud Kubernetes Service (IKS) or Red OpenShift on IBM Cloud (ROKS)._
 
 _This version of the workshop is based on [Minikube](https://minikube.sigs.k8s.io/docs/) running on your own workstation._  
 
@@ -57,16 +57,3 @@ You can find detailed information and learn more about Knative here:
    - [Serverless and Knative – Part 3: Knative Eventing](https://haralduebele.blog/2020/06/10/serverless-and-knative-part-3-knative-eventing/)
    - [Knative Example: Deploying a Microservices Application](https://haralduebele.blog/2020/07/02/knative-example-deploying-a-microservices-application/) -- The YAML files for this example are in the `code/cloud-native-starter` directory
 
-There is an [Instructor Readme](instructor.md), too.
-
-## Tools:
-
-To run the workshop completely off your own workstation you need the following tools (depending on the track you select):
-
-Tool  |Source       
-----------------|----
-Minikube|https://minikube.sigs.k8s.io/docs/start/
-git CLI|https://git-scm.com/downloads 
-kubectl|https://kubernetes.io/docs/tasks/tools/install-kubectl/
-kn|https://knative.dev/docs/install/install-kn/
-hey|HTTP Load generator: https://github.com/rakyll/hey

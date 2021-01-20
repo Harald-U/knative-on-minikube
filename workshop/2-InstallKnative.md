@@ -1,50 +1,88 @@
-# Installing Knative
+# 2 - Installing Knative
 
-Knative [requires a networking layer with an Ingress](https://knative.dev/docs/install/any-kubernetes-cluster/) that is not part of the Knative installation itself. There are several options, Istio is one of them, another one is [Kourier](https://github.com/knative/net-kourier) which is actually maintained now by the Knative project. Others are Ambassador, Contour, Glue, and Kong. Red Hat OpenShift Serverless, the OpenShift version of Knative, uses Kourier. We will use Istio in this lab, it is already available on the IBM Cloud.
+A Minikube "cluster" has been created in th eprevious section.
 
-The Kubernetes cluster that has been assigned to you and that you will use during this workshop is provided by the [IBM Cloud Kubernetes Service](https://cloud.ibm.com/docs/containers?topic=containers-getting-started), IKS. 
+Installation of Knative is covered in the [Knative documentation](https://knative.dev/docs/install/any-kubernetes-cluster/). We will install Knative Serving in this section using Kourier as networking layer.
 
-IKS offers add-ons to Kubernetes, namely Istio and Knative. They will be automatically installed and managed by IBM. There is a cluster size requirement for Istio (minimum 3 worker nodes) which is also applicable to Knative because it requires Istio. The pre-provisioned clusters meet the requirement. Installing the Knative add-on automatically installs Istio if required. 
+### Installing the Serving component 
 
-1. To install Knative, go to the 'Add-ons' page of your cluster:
-   ![IKS add-ons](images/add-ons.png)
-   
-1. Click on 'Install', this will inform you about the version of Istio and Knative:
-   ![IKS add-ons](images/knative-add-on.png)
-   
-1. Click 'Install' again, after a moment, the 'Install' buttons for Istio and Knative will disappear and a status for the installation will show:
-   ![IKS add-ons](images/add-ons-2.png)
-      
-1. The installation status will show a green check mark and "Normal - Addon Ready"
-when Knative and Istio have been installed successfully.
+1. Install the Knative Serving Custom Resource Definitions (aka CRDs):
 
-1. In the IBM Cloud Shell check the Kubernetes namespaces:
+      ```sh
+      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.20.0/serving-crds.yaml
+      ```
 
-   ```
-   kubectl get ns
-   ```
-   Output:
-   ```
-   NAME               STATUS   AGE
-   default            Active   18h
-   ibm-cert-store     Active   18h
-   ibm-operators      Active   18h
-   ibm-system         Active   18h
-   istio-system       Active   12m
-   knative-eventing   Active   12m
-   knative-serving    Active   12m
-   knative-sources    Active   12m
-   kube-node-lease    Active   18h
-   kube-public        Active   18h
-   kube-system        Active   18h
-   tekton-pipelines   Active   12m
-   ```
-   
-   Notice 'istio-system' and the namespaces starting with 'knative-'
-   
-   If you like check the pods in each of these namespaces.
-   
+1. Install the core components of Knative Serving:
+
+      ```sh
+      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.20.0/serving-core.yaml
+      ```
+
+### Installing Kourier as networking layer
+
+Knative [requires a networking layer with an Ingress](https://knative.dev/docs/install/any-kubernetes-cluster/) that is not part of the Knative installation itself. There are several options, Istio is one of them, another one is [Kourier](https://github.com/knative/net-kourier) which was developed originally by 3Scale which is now a part of Red Hat. Kourier is now maintained by the Knative project itself. Other networking options are Ambassador, Contour, Glue, and Kong. 
+
+We will use Kourier in this lab, you can find more information about Kourier in this [Red Hat blog](https://developers.redhat.com/blog/2020/06/30/kourier-a-lightweight-knative-serving-ingress/).
+
+![Kourier](../images/Kourier_diagram.png)
+
+The following commands install Kourier and enable its Knative integration.
+
+1. Install the Knative Kourier controller:
+
+      ```
+      kubectl apply --filename https://github.com/knative/net-kourier/releases/download/v0.20.0/kourier.yaml
+      ```
+
+1. Configure Knative Serving to use Kourier by default:
+
+      ```
+      kubectl patch configmap/config-network \
+      --namespace knative-serving \
+      --type merge \
+      --patch '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
+      ```
+
+1. Check the External IP:
+
+      ```
+      kubectl --namespace kourier-system get service kourier
+      ```
+
+      Result should show the external IP as `<pending>` which is normal for Minikube.
+
+### Configure DNS
+
+Knative ships a simple Kubernetes Job called “default domain” that will configure Knative Serving to use [xip.io](http://xip.io/) as the default DNS suffix.
+
+1. Apply the Kubernetes job:
+
+      ```
+      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.20.0/serving-default-domain.yaml
+      ```
+
+1. Create a Minikube tunnel. Enter the following command in another terminal session:
+
+      ```
+      minikube tunnel
+      ```
+
+      This requires sudo rights.
+
+1. Check the External IP again:
+
+      ```
+      kubectl --namespace kourier-system get service kourier
+      ```
+
+      Result should show the external IP equal to the Cluster IP of the service, e.g. `10.103.104.209`. 
+
+      This makes the Knative services reachable on your notebook via the DNS entry `*.10.103.104.209.xip.io`.
+
+      How does this work: A DNS request for e.g. helloworld.10.103.104.209.xip.io will resolve to IP address 10.103.104.209. This IP address is made available by `minikube tunnel` and is answered via the Kourier ingress gateway. It's magic :-)
+
+
 ---
 
-__Continue with the next part [Deploy a Knative Service](3-DeployKnativeService.md)__      
+__Continue with the next part [3 - Deploy a Knative Service](../workshop/3-DeployKnativeService.md)__      
 

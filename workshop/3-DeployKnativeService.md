@@ -1,14 +1,14 @@
-# Deploy a Knative Service
+# 3 - Deploy a Knative Service
 
 
 Knative Serving is responsible for deploying and running containers and also for networking and auto-scaling. Auto-scaling in Knative allows scale to zero and is probably the main reason why Knative is referred to as Serverless platform.
 
-This is some text from the [Knative Runtime Contract](https://github.com/knative/serving/blob/master/docs/runtime-contract.md) which helps to position Knative. It compares Kubernetes workloads (general-purpose containers) with Knative workloads (stateless request-triggered autoscaled containers):
+This is a section from the [Knative Runtime Contract](https://github.com/knative/serving/blob/master/docs/runtime-contract.md) which helps to position Knative. It compares Kubernetes workloads (general-purpose containers) with Knative workloads (stateless request-triggered autoscaled containers):
 
 > In contrast to general-purpose containers, stateless request-triggered (i.e. on-demand) autoscaled containers have the following properties:
-> * Little or no long-term runtime state (especially in cases where code might be scaled to zero in the absence of request traffic).
-> * Logging and monitoring aggregation (telemetry) is important for understanding and debugging the system, as containers might be created or deleted at any time in response to autoscaling.
-> * Multitenancy is highly desirable to allow cost sharing for bursty applications on relatively stable underlying hardware resources.
+> * __Little or no long-term runtime state__ (especially in cases where code might be scaled to zero in the absence of request traffic).
+> * __Logging and monitoring aggregation (telemetry) is important__ for understanding and debugging the system, as containers might be created or deleted at any time in response to autoscaling.
+> * __Multitenancy is highly desirable__ to allow cost sharing for bursty applications on relatively stable underlying hardware resources.
 
 In other words: Knative positions itself suited for short running, stateless processes. You need to provide central logging and monitoring because the pods come and go. And multi-tenant hardware is best because it can be provided large enough to scale for peaks and at the same time make effective use of the resources. 
 
@@ -19,9 +19,9 @@ Knative uses new terminology for its resources and unfortunately there is some d
 1. __Configuration:__ Desired state of the workload. Creates and maintains Revisions.
 1. __Revision:__ A specific version of a code deployment. Revisions are immutable. Revisions can be scaled up and down. Rules can be applied to the Route to direct traffic to specific Revisions.
 
-![Kn object model](images/object_model.png)
+![Kn object model](../images/object_model.png)
 
-And Knative uses a new CLI `kn` which is already installed in IBM Cloud Shell.
+And Knative uses a new CLI `kn` which you should have installed in the Setup section of this workshop.
 
 ## Sample application
 
@@ -55,11 +55,21 @@ This allows to simply create new versions for deployments = Knative Revisions by
 
 There is also a Dockerfile that can be used to build a container image. You can use it to create your own version and store it in your own Container Image Repository. If you don't like Node.js, the Hello World sample is available in other languages, too: Go, Java, PHP, Python, Ruby, etc.
 
-For this workshop we will use a Container Image on Docker Hub (docker.io) provided by IBM. They used the Helloworld Go sample to build the image.
+For this workshop we will use a Container Image on Docker Hub (docker.io) provided by IBM. I believe that they used the Helloworld Go sample to build the image.
+
+## Create a namespace
+
+Create a new namespace `kntest` for the workshop and switch the `kubectl` context t use it:
+
+```
+kubectl create namespace kntest
+kubectl config set-context --current --namespace=kntest
+kubectl config view --minify | grep namespace
+```
+
+Throughout this workshop we will use the 'kntest' namespace of the Kubernetes cluster.
 
 ## Deploy a Knative Service (ksvc)
-
-Throughout this workshop we will use the 'default' namespace of the Kubernetes cluster.
 
 Knative deployments use YAML files just like Kubernetes but much simpler.
 
@@ -89,7 +99,7 @@ spec:
  
 If you are used to Kubernetes, you have to start to pay close attention to the apiVersion to see that this is the definition of a Knative Service.
 
-The second metadata name 'helloworld-v1' is optional but highly recommended. It is used to predictable names for the Revisions. If you omit this second name, Knative will use default names for the Revisions (e.g. “helloworld-xhz5df”) and if you have more than one version/revision this makes it difficult to distinguish between them.
+The second metadata name 'helloworld-v1' is optional but highly recommended. It is used to generate predictable names for the Revisions. If you omit this second name, Knative will use default names for the Revisions (e.g. “helloworld-xhz5df”) and if you have more than one version/revision this makes it difficult to distinguish between them.
 
 The 'spec' part is 'classic' Kubernetes, it describes the location and name of the Container image and it defines the TARGET environment variable that I described in section "Sample Application".
 
@@ -108,21 +118,24 @@ The 'spec' part is 'classic' Kubernetes, it describes the location and name of t
    kn service list
    ```
 
-   Output (**Note:** Throughout the instructions the URL is always shortened to make it more readable):
+   Output:
    ```
-   NAME         URL                                                     LATEST          AGE   CONDITIONS   READY   REASON
-   helloworld   http://helloworld-default.mycluster...appdomain.cloud   helloworld-v1   61s   3 OK / 3     True    
+   NAME         URL                                               LATEST          AGE   CONDITIONS   READY   REASON
+   helloworld   http://helloworld.kntest.10.103.104.209.xip.io   helloworld-v1   55s   3 OK / 3     True  
    ```
 
 1. Copy the URL ('http://helloworld ...') and open it with `curl` or in your browser:
 
    ```
-   curl http://helloworld-default.mycluster...appdomain.cloud
+   curl http://helloworld.kntest.10.103.104.209.xip.io
    ```
    Output:
    ```
    Hello HelloWorld Sample v1!
    ```
+
+   Note: `minikube tunnel`, started in another terminal session, must be active for this to work!
+
 1. Check the status of the 'helloworld' pod:
    ```
    kubectl get pod
@@ -136,7 +149,7 @@ The 'spec' part is 'classic' Kubernetes, it describes the location and name of t
    ```
    Notice the count for READY: 2 / 2 
    
-   2 of 2 containers are started in the pod! Remember that the installation of the Knative add-on included Istio. What we see here is Istio at work: Knative/Istio injects an Envoy sidecar into the helloworld-v1 pod, this is the second container we are seeing in the count!
+   2 of 2 containers are started in the pod! Remember that the installation of the Knative included Kourier. What we see here is Kourier at work, it injects a proxy, comparable to an Istio Envoy sidecar, into the helloworld-v1 pod, this is the second container we are seeing in the count!
    
 1. What has been created on Kubernetes?
 
@@ -202,7 +215,7 @@ The 'spec' part is 'classic' Kubernetes, it describes the location and name of t
     
 ---
 
-__Continue with the next part [Knative Revisions](4-Revision.md)__    
+__Continue with the next part [4 - Knative Revisions](4-Revision.md)__    
         
    
 
