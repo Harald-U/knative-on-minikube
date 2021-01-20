@@ -42,7 +42,7 @@ This workshop will **focus on Knative Serving** and will cover the following top
 - [6 - Auto-Scaling](workshop/6-Scaling.md)
 - [7 - Debugging Tips](workshop/7-Debugging.md)
 
-To complete this workshop, basic understanding of Kubernetes/OpenShift and application deployment on Kubernetes is instrumental!
+To complete this workshop, basic understanding of Kubernetes itself and application deployment on Kubernetes is instrumental!
 
 ## Resources:
 
@@ -50,7 +50,6 @@ You can find detailed information and learn more about Knative here:
 
 1. [Knative documentation](https://knative.dev/docs)
 2. [Red Hat Knative Tutorial](https://redhat-developer-demos.github.io/knative-tutorial/knative-tutorial/index.html)
-3. [Deploying serverless apps with Knative (IBM Cloud Documentation)](https://cloud.ibm.com/docs/containers?topic=containers-serverless-apps-knative)
 4.  A series of blogs on Knative:
    - [Serverless and Knative – Part 1: Installing Knative on CodeReady Containers](https://haralduebele.blog/2020/06/02/serverless-and-knative-part-1-installing-knative-on-codeready-containers/)
    - [Serverless and Knative – Part 2: Knative Serving](https://haralduebele.blog/2020/06/03/serverless-and-knative-part-2-knative-serving/)
