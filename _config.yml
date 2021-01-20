@@ -1,0 +1,22 @@
+theme: jekyll-theme-minimal
+title: Knative on Minikube
+description: Run Knative on Minikube on your own notebook
+show_downloads: True
+navigation:
+  - title: HOME
+    url: /
+  - title: 1 - Setup the work environment
+    url: workshop/1-Prereqs
+  - title: 2 - Install Knative
+    url: workshop/2-InstallKnative
+  - title: 3 - Deploy a Knative Service
+    url: workshop/3-DeployKnativeService
+  - title: 4 - Create a Knative Revision
+    url: workshop/4-Revision
+  - title: 5 - Traffic Management
+    url: workshop/5-TrafficManagement
+  - title: 6 - Auto-Scaling
+    url: workshop/6-Scaling
+  - title: 7 - Debugging Tips
+    url: workshop/7-Debugging
+
