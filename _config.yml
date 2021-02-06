@@ -4,7 +4,7 @@ description: Run Knative on Minikube on your own notebook
 show_downloads: True
 logo: /images/knative-logo.png
 navigation:
-  - title: HOME
+  - title: Overview
     url: /
   - title: 1 - Setup the work environment
     url: workshop/1-Prereqs

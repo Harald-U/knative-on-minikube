@@ -1,9 +1,6 @@
 ---
 layout: default
 ---
-# {{site.title}}
-
----
 
 _This workshop is an adaptation of the [Knative Hands-on Workshop](https://harald-u.github.io/knative-handson-workshop/) I created for IBM._
 
