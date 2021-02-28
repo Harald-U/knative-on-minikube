@@ -1,3 +1,8 @@
+---
+title: 1 - Setup the work environment
+layout: default
+---
+
 # 1 - Setup the work environment with Minikube
 
 The instructions will work on Linux and macOS, they have not been tested on Windows.

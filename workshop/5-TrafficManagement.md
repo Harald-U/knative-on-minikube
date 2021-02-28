@@ -1,3 +1,8 @@
+---
+title: 5 - Traffic Management
+layout: default
+---
+
 # 5 - Knative Traffic Management
 
 In the last section you have replaced revision v1 of the helloworld app with revision v2.

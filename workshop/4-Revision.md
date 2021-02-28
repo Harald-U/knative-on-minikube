@@ -1,3 +1,8 @@
+---
+title: 4 - Create a Knative Revision
+layout: default
+---
+
 # 4 - Knative Revisions
 
 A Knative Revision is a specific version of a code deployment. 

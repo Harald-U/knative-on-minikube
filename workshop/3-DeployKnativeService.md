@@ -1,3 +1,8 @@
+---
+title: 3 - Deploy a Knative Service
+layout: default
+---
+
 # 3 - Deploy a Knative Service
 
 

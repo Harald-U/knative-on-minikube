@@ -1,3 +1,8 @@
+---
+title: 6 - Auto-Scaling
+layout: default
+---
+
 # 6 - Knative Auto-Scaling
 
 Scale to zero is an interesting feature but without additional tricks (like pre-started containers or pods, which aren't available in Knative) it can be annoying because users may have to wait until a new pod is started and ready to receive requests. Or it can lead to problems like time-outs in a microservices architecture if a scaled-to-zero service is called by another service and has to be started first and takes some time to start (e.g. traditional Java based service). 

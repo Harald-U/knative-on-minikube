@@ -1,3 +1,8 @@
+---
+title: 2 - Install Knative
+layout: default
+---
+
 # 2 - Installing Knative
 
 A Minikube "cluster" has been created in th eprevious section.
