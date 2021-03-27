@@ -48,9 +48,9 @@ Those additional 7 lines of code will create a 75% / 25% distribution between re
    kubectl apply -f service-v2-canary.yaml
    ```
    
-1. Still in the first terminal session, execute the `curl` within a `watch`:
+1. Still in the first terminal session, execute the `curl` within a `watch`, e.g.:
    ```
-   watch curl http://helloworld....appdomain.cloud  
+   watch curl http://helloworld.kntest.10.103.104.209.xip.io  
    ```
    
    Check the second terminal session. There are now two pods, one for each revision:

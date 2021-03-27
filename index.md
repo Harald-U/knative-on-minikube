@@ -25,7 +25,7 @@ How is the experience of deploying an application on Kubernetes versus Knative?
 
 It is an additional layer installed on top of Kubernetes. 
 
-It has two distinct components, originally it were three. The third was called Knative Build, it is now a project of its own: [Tekton](https://tekton.dev/). 
+It has two distinct components, originally it were three. The third was called Knative Build, it is now a project of its own: [Tekton](https://tekton.dev/){:target="_blank"}. 
 
 * __Knative Serving__ is responsible for deploying and running containers, also networking and auto-scaling. Auto-scaling allows scale to zero and is probably the main reason why Knative is referred to as Serverless platform.
 * __Knative Eventing__ allows to connect Knative services (deployed by Knative Serving) or other Kubernetes deployments with events or streams of events.
@@ -46,11 +46,11 @@ To complete this workshop, basic understanding of Kubernetes itself and applicat
 
 You can find detailed information and learn more about Knative here:
 
-1. [Knative documentation](https://knative.dev/docs)
-2. [Red Hat Knative Tutorial](https://redhat-developer-demos.github.io/knative-tutorial/knative-tutorial/index.html)
+1. [Knative documentation](https://knative.dev/docs){:target="_blank"}
+2. [Red Hat Knative Tutorial](https://redhat-developer-demos.github.io/knative-tutorial/knative-tutorial/index.html){:target="_blank"}
 4.  A series of blogs on Knative:
-   - [Serverless and Knative – Part 1: Installing Knative on CodeReady Containers](https://haralduebele.blog/2020/06/02/serverless-and-knative-part-1-installing-knative-on-codeready-containers/)
-   - [Serverless and Knative – Part 2: Knative Serving](https://haralduebele.blog/2020/06/03/serverless-and-knative-part-2-knative-serving/)
-   - [Serverless and Knative – Part 3: Knative Eventing](https://haralduebele.blog/2020/06/10/serverless-and-knative-part-3-knative-eventing/)
-   - [Knative Example: Deploying a Microservices Application](https://haralduebele.blog/2020/07/02/knative-example-deploying-a-microservices-application/) -- The YAML files for this example are in the `code/cloud-native-starter` directory
+   - [Serverless and Knative – Part 1: Installing Knative on CodeReady Containers](https://haralduebele.github.io/2020/06/02/serverless-and-knative-part-1-installing-knative-on-codeready-containers/){:target="_blank"}
+   - [Serverless and Knative – Part 2: Knative Serving](https://haralduebele.github.io/2020/06/03/serverless-and-knative-part-2-knative-serving/){:target="_blank"}
+   - [Serverless and Knative – Part 3: Knative Eventing](https://haralduebele.github.io/2020/06/10/serverless-and-knative-part-3-knative-eventing/){:target="_blank"}
+   - [Knative Example: Deploying a Microservices Application](https://haralduebele.github.io/2020/07/02/knative-example-deploying-a-microservices-application/){:target="_blank"} -- The YAML files for this example are in the `code/cloud-native-starter` directory
 

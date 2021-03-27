@@ -14,13 +14,13 @@ Installation of Knative is covered in the [Knative documentation](https://knativ
 1. Install the Knative Serving Custom Resource Definitions (aka CRDs):
 
       ```sh
-      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.20.0/serving-crds.yaml
+      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.21.0/serving-crds.yaml
       ```
 
 1. Install the core components of Knative Serving:
 
       ```sh
-      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.20.0/serving-core.yaml
+      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.21.0/serving-core.yaml
       ```
 
 ### Installing Kourier as networking layer
@@ -36,7 +36,7 @@ The following commands install Kourier and enable its Knative integration.
 1. Install the Knative Kourier controller:
 
       ```
-      kubectl apply --filename https://github.com/knative/net-kourier/releases/download/v0.20.0/kourier.yaml
+      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.21.0/serving-default-domain.yaml
       ```
 
 1. Configure Knative Serving to use Kourier by default:
@@ -63,7 +63,7 @@ Knative ships a simple Kubernetes Job called “default domain” that will conf
 1. Apply the Kubernetes job:
 
       ```
-      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.20.0/serving-default-domain.yaml
+      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.21.0/serving-default-domain.yaml
       ```
 
 1. Create a Minikube tunnel. Enter the following command in another terminal session:
@@ -84,7 +84,20 @@ Knative ships a simple Kubernetes Job called “default domain” that will conf
 
       This makes the Knative services reachable on your notebook via the DNS entry `*.10.103.104.209.xip.io`.
 
-      How does this work: A DNS request for e.g. helloworld.10.103.104.209.xip.io will resolve to IP address 10.103.104.209. This IP address is made available by `minikube tunnel` and is answered via the Kourier ingress gateway. It's magic :-)
+      Test if this works (with your own external IP address!):
+
+      ```
+      ping 10.103.104.209.xip.io
+      ```
+
+      Result, e.g.:
+
+      ```
+      PING 10.103.104.209.xip.io (10.103.104.209) 56(84) bytes data.
+      From 192.168.49.2 (192.168.49.2) icmp_seq=2 Host redirect (New nexthop: 1.49.168.192 (1.49.168.192))
+      ```
+
+      How does this work: A DNS request for e.g. helloworld.10.103.104.209.xip.io will resolve to IP address 10.103.104.209 which is "tunneled" into your Minikube instance via `minikube tunnel`. This IP address is made available by `minikube tunnel` and is answered via the Kourier ingress gateway. It's magic :-)
 
 
 ---

@@ -10,7 +10,7 @@ This version of the workshop is based on [Minikube](https://minikube.sigs.k8s.io
 
 Follow the workshop here on Github Pages: 
 
-[https://harald-u.github.io/knative-on-minikube/](https://harald-u.github.io/knative-on-minikube/)
+[https://harald-u.github.io/knative-on-minikube/](https://harald-u.github.io/knative-on-minikube/){:target="_blank"}
 
 
 ---

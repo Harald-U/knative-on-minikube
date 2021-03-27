@@ -37,6 +37,10 @@ The Docker driver allows you to install Kubernetes into an existing Docker insta
 ```
 minikube start --cpus 2 --memory 4096 --driver=docker
 ```
+
+**Note:** _If you have an existing Minikube cluster (from a previous lab), you may want to delete it with_ `minikube delete` _first. Deleting and recreating a Minikube cluster is likely to be a lot faster than clean-up in the existing one._ 
+
+
 Output:
 
 ```

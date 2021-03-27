@@ -47,10 +47,13 @@ You can also [scale based on CPU usage or number of requests](https://knative.de
    ```
    You should notice that 1 pod is running, and running longer than 60 seconds. This is the result of `minScale: "1"`. Scale to zero has been turned off.
    
-1. In the first terminal session generate some load:
+1. In the first terminal session generate some load (remember to use your own IP address here!):
    ```
-   hey -z 30s -c 50 http://helloworld-....appdomain.cloud   
+   hey -z 30s -c 50 http://helloworld.kntest.10.100.59.30.xip.io
    ```
+  `hey` is a simple HTTP load generator, `-z 30` means 'run for 30 seconds' and `-c 50` starts 50 concurrent sessions.
+
+   
    Switch over to session 2 and watch 4 more pods being started.
    ```
    NAME                                         READY   STATUS    RESTARTS   AGE
