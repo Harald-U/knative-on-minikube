@@ -58,7 +58,7 @@ The following commands install Kourier and enable its Knative integration.
 
 ### Configure DNS
 
-Knative ships a simple Kubernetes Job called “default domain” that will configure Knative Serving to use [xip.io](http://xip.io/) as the default DNS suffix.
+Knative ships a simple Kubernetes Job called “default domain” that will configure Knative Serving to use [xip.io](http://xip.io/){:target="_blank"} as the default DNS suffix.
 
 1. Apply the Kubernetes job:
 
@@ -97,7 +97,7 @@ Knative ships a simple Kubernetes Job called “default domain” that will conf
       From 192.168.49.2 (192.168.49.2) icmp_seq=2 Host redirect (New nexthop: 1.49.168.192 (1.49.168.192))
       ```
 
-      How does this work: A DNS request for e.g. helloworld.10.103.104.209.xip.io will resolve to IP address 10.103.104.209 which is "tunneled" into your Minikube instance via `minikube tunnel`. This IP address is made available by `minikube tunnel` and is answered via the Kourier ingress gateway. It's magic :-)
+      How does this work: A DNS request for e.g. helloworld.10.103.104.209.xip.io will resolve to IP address 10.103.104.209. This IP address is made available by `minikube tunnel` and is answered via the Kourier ingress gateway. It's magic :-)
 
 
 ---

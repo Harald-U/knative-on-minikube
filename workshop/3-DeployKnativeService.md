@@ -8,7 +8,7 @@ layout: default
 
 Knative Serving is responsible for deploying and running containers and also for networking and auto-scaling. Auto-scaling in Knative allows scale to zero and is probably the main reason why Knative is referred to as Serverless platform.
 
-This is a section from the [Knative Runtime Contract](https://github.com/knative/serving/blob/master/docs/runtime-contract.md) which helps to position Knative. It compares Kubernetes workloads (general-purpose containers) with Knative workloads (stateless request-triggered autoscaled containers):
+This is a section from the [Knative Runtime Contract](https://github.com/knative/serving/blob/master/docs/runtime-contract.md){:target="_blank"} which helps to position Knative. It compares Kubernetes workloads (general-purpose containers) with Knative workloads (stateless request-triggered autoscaled containers):
 
 > In contrast to general-purpose containers, stateless request-triggered (i.e. on-demand) autoscaled containers have the following properties:
 > * __Little or no long-term runtime state__ (especially in cases where code might be scaled to zero in the absence of request traffic).
@@ -30,7 +30,7 @@ And Knative uses a new CLI `kn` which you should have installed in the Setup sec
 
 ## Sample application
 
-In this workshop we will use one of the [Hello World](https://knative.dev/docs/serving/samples/hello-world/) code samples from the Knative documentation site.
+In this workshop we will use one of the [Hello World](https://knative.dev/docs/serving/samples/hello-world/){:target="_blank"} code samples from the Knative documentation site.
 
 I have taken the liberty to copy the Node.js sample code into this Github repository so that everything is in one place. 
 

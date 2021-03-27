@@ -72,4 +72,4 @@ There are new places in your environment to look for information as to why a Kna
 
     ---
     
-    There is more information on [Debugging issues with your application](https://knative.dev/docs/serving/debugging-application-issues/) on the Knative docs site.
+    There is more information on [Debugging issues with your application](https://knative.dev/docs/serving/debugging-application-issues/){:target="_blank"} on the Knative docs site.

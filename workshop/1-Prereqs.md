@@ -15,11 +15,11 @@ To run the workshop completely off your own workstation you need the following t
 
 Tool  |Source       
 ----------------|----
-Minikube|[https://minikube.sigs.k8s.io/docs/start/](https://minikube.sigs.k8s.io/docs/start/)
-git CLI|[https://git-scm.com/downloads](https://git-scm.com/downloads) 
-kubectl|[https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-kn|[https://knative.dev/docs/install/install-kn/](https://knative.dev/docs/install/install-kn/)
-hey|(HTTP Load generator) [https://github.com/rakyll/hey](https://github.com/rakyll/hey)
+Minikube|[https://minikube.sigs.k8s.io/docs/start/](https://minikube.sigs.k8s.io/docs/start/){:target="_blank"}
+git CLI|[https://git-scm.com/downloads](https://git-scm.com/downloads){:target="_blank"} 
+kubectl|[https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/){:target="_blank"}
+kn|[https://knative.dev/docs/install/install-kn/](https://knative.dev/docs/install/install-kn/){:target="_blank"}
+hey|(HTTP Load generator) [https://github.com/rakyll/hey](https://github.com/rakyll/hey){:target="_blank"}
 
 ### Step 2: Download the code from this repository
 
