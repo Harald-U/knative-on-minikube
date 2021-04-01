@@ -36,7 +36,7 @@ The following commands install Kourier and enable its Knative integration.
 1. Install the Knative Kourier controller:
 
       ```
-      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.21.0/serving-default-domain.yaml
+      kubectl apply --filename https://github.com/knative/net-kourier/releases/download/v0.21.0/kourier.yaml
       ```
 
 1. Configure Knative Serving to use Kourier by default:
