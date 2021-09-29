@@ -22,13 +22,16 @@ metadata:
 spec:
   template:
     metadata:
+      # This is the name of our new "Revision," it must follow the convention {service-name}-{revision-name}
       name: helloworld-v2
     spec:
       containers:
-        - image: docker.io/ibmcom/kn-helloworld
+        - image: gcr.io/knative-samples/helloworld-go
+          ports:
+            - containerPort: 8080
           env:
             - name: TARGET
-              value: "HelloWorld Sample v2 -- UPDATED"
+              value: "World V2 -- UPDATED"
 ```
 
 Version 2 has a new value for the TARGET environment variable. 
@@ -63,7 +66,7 @@ It also has a new revision name ('helloworld-v2'), if this does not change, Knat
    
 1. Test it with `curl`, output:
    ```
-   Hello HelloWorld Sample v2 -- UPDATED!
+   Hello World V2 -- UPDATED!
    ```   
 1. Display the Revisions:
    ```
@@ -82,4 +85,4 @@ It also has a new revision name ('helloworld-v2'), if this does not change, Knat
 
 ---
 
-__Continue with the next part [5 - Knative Traffic Management](5-TrafficManagement.md)__
+__Continue with the next part [5 - Knative Traffic Management](5-TrafficManagement)__

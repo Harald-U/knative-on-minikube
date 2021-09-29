@@ -5,6 +5,7 @@ metadata:
 spec:
   template:
     metadata:
+      # This is the name of our new "Revision," it must follow the convention {service-name}-{revision-name}
       name: helloworld-v3
       annotations:
         # the minimum number of pods to scale down to
@@ -15,8 +16,10 @@ spec:
         autoscaling.knative.dev/target: "1"
     spec:
       containers:
-        - image: docker.io/ibmcom/kn-helloworld
+        - image: gcr.io/knative-samples/helloworld-go
+          ports:
+            - containerPort: 8080
           env:
             - name: TARGET
-              value: "HelloWorld Sample v3 -- Scaling"
+              value: "World V3 -- Scaling"
 

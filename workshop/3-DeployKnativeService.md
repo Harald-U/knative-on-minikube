@@ -85,6 +85,7 @@ cd deploy
 ```
 
 We will deploy the first revision of the helloworld service with the file *service.yaml*:
+
 ```
 apiVersion: serving.knative.dev/v1
 kind: Service
@@ -93,13 +94,16 @@ metadata:
 spec:
   template:
     metadata:
+      # This is the name of our new "Revision," it must follow the convention {service-name}-{revision-name}
       name: helloworld-v1
     spec:
       containers:
-        - image: docker.io/ibmcom/kn-helloworld
+        - image: gcr.io/knative-samples/helloworld-go
+          ports:
+            - containerPort: 8080
           env:
             - name: TARGET
-              value: "HelloWorld Sample v1"
+              value: "World"
 ```
  
 If you are used to Kubernetes, you have to start to pay close attention to the apiVersion to see that this is the definition of a Knative Service.
@@ -136,7 +140,7 @@ The 'spec' part is 'classic' Kubernetes, it describes the location and name of t
    ```
    Output:
    ```
-   Hello HelloWorld Sample v1!
+   Hello World!
    ```
 
    Note: `minikube tunnel`, started in another terminal session, must be active for this to work!
@@ -148,10 +152,12 @@ The 'spec' part is 'classic' Kubernetes, it describes the location and name of t
    If the result is 'No resources found in default namespace.' then execute the `curl` command again or refresh the browser, the pod has then been scaled down to zero already. This happens by default after some 60 seconds.
 
    Expected output:
+
    ```
-   NAME                                       READY   STATUS    RESTARTS   AGE
-   helloworld-v1-deployment-ff8d96cf5-72pfd   2/2     Running   0          11s
+   NAME                                        READY   STATUS    RESTARTS   AGE
+   helloworld-v1-deployment-5cc55cdf4f-qzmr9   2/2     Running   0          9s
    ```
+
    Notice the count for READY: 2 / 2 
    
    2 of 2 containers are started in the pod! Remember that the installation of the Knative included Kourier. What we see here is Kourier at work, it injects a proxy, comparable to an Istio Envoy sidecar, into the helloworld-v1 pod, this is the second container we are seeing in the count!
@@ -164,32 +170,31 @@ The 'spec' part is 'classic' Kubernetes, it describes the location and name of t
    ```
    Output:
    ```
-    NAME                                           READY   STATUS    RESTARTS   AGE
-    pod/helloworld-v1-deployment-ff8d96cf5-8f257   2/2     Running   0          32s
+    NAME                                            READY   STATUS    RESTARTS   AGE
+    pod/helloworld-v1-deployment-5cc55cdf4f-qzmr9   2/2     Running   0          59s
 
-    NAME                            TYPE           CLUSTER-IP       EXTERNAL-IP                      PORT(S)      AGE
-    service/helloworld              ExternalName   <none>           cluster-local....cluster.local   <none>       108m
-    service/helloworld-v1           ClusterIP      172.21.234.161   <none>                           80/TCP       108m
-    service/helloworld-v1-private   ClusterIP      172.21.220.196   <none>                           80/TCP...    108m
-    [...]    
+    NAME                            TYPE           CLUSTER-IP      EXTERNAL-IP                                         PORT(S)                                      AGE
+    service/helloworld              ExternalName   <none>          kourier-internal.kourier-system.svc.cluster.local   80/TCP                                       3m26s
+    service/helloworld-v1           ClusterIP      10.104.234.44   <none>                                              80/TCP                                       4m27s
+    service/helloworld-v1-private   ClusterIP      10.99.37.82     <none>                                              80/TCP,9090/TCP,9091/TCP,8022/TCP,8012/TCP   4m27s
 
     NAME                                       READY   UP-TO-DATE   AVAILABLE   AGE
-    deployment.apps/helloworld-v1-deployment   1/1     1            1           108m
+    deployment.apps/helloworld-v1-deployment   1/1     1            1           4m27s
 
-    NAME                                                 DESIRED   CURRENT   READY   AGE
-    replicaset.apps/helloworld-v1-deployment-ff8d96cf5   1         1         1       108m
+    NAME                                                  DESIRED   CURRENT   READY   AGE
+    replicaset.apps/helloworld-v1-deployment-5cc55cdf4f   1         1         1       4m27s
 
-    NAME                                   URL                                                                                                                         READY   REASON
-    route.serving.knative.dev/helloworld   http://helloworld..appdomain.cloud   True    
+    NAME                                     URL                                              LATESTCREATED   LATESTREADY     READY   REASON
+    service.serving.knative.dev/helloworld   http://helloworld.kntest.10.99.87.183.sslip.io   helloworld-v1   helloworld-v1   True    
 
     NAME                                           LATESTCREATED   LATESTREADY     READY   REASON
     configuration.serving.knative.dev/helloworld   helloworld-v1   helloworld-v1   True    
 
-    NAME                                         CONFIG NAME   K8S SERVICE NAME   GENERATION   READY   REASON
-    revision.serving.knative.dev/helloworld-v1   helloworld    helloworld-v1      1            True    
+    NAME                                         CONFIG NAME   K8S SERVICE NAME   GENERATION   READY   REASON   ACTUAL REPLICAS   DESIRED REPLICAS
+    revision.serving.knative.dev/helloworld-v1   helloworld                       1            True             1                 1
 
-    NAME                                     URL                                    LATESTCREATED   LATESTREADY     READY 
-    service.serving.knative.dev/helloworld   http://helloworld....appdomain.cloud   helloworld-v1   helloworld-v1   True    
+    NAME                                   URL                                              READY   REASON
+    route.serving.knative.dev/helloworld   http://helloworld.kntest.10.99.87.183.sslip.io   True    
     ```
 
     There is 1 pod, 3 services, 1 deployment, and 1 replicaset, all are Kubernetes objects. To create all this in Kubernetes itself would have taken a lot more than 14 lines of YAML code.
@@ -220,7 +225,7 @@ The 'spec' part is 'classic' Kubernetes, it describes the location and name of t
     
 ---
 
-__Continue with the next part [4 - Knative Revisions](4-Revision.md)__    
+__Continue with the next part [4 - Knative Revisions](4-Revision)__    
         
    
 

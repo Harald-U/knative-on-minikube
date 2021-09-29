@@ -5,27 +5,27 @@ layout: default
 
 # 2 - Installing Knative
 
-A Minikube "cluster" has been created in th eprevious section.
+A Minikube "cluster" has been created in the previous section.
 
-Installation of Knative is covered in the [Knative documentation](https://knative.dev/docs/install/any-kubernetes-cluster/). We will install Knative Serving in this section using Kourier as networking layer.
+Installation of Knative is covered in the [Knative Administartion guide](https://knative.dev/docs/admin/install/serving/install-serving-with-yaml/). We will install Knative Serving in this section using Kourier as networking layer.
 
 ### Installing the Serving component 
 
 1. Install the Knative Serving Custom Resource Definitions (aka CRDs):
 
       ```sh
-      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.21.0/serving-crds.yaml
+      kubectl apply -f https://github.com/knative/serving/releases/download/v0.26.0/serving-crds.yaml
       ```
 
 1. Install the core components of Knative Serving:
 
       ```sh
-      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.21.0/serving-core.yaml
+      kubectl apply -f https://github.com/knative/serving/releases/download/v0.26.0/serving-core.yaml
       ```
 
 ### Installing Kourier as networking layer
 
-Knative [requires a networking layer with an Ingress](https://knative.dev/docs/install/any-kubernetes-cluster/) that is not part of the Knative installation itself. There are several options, Istio is one of them, another one is [Kourier](https://github.com/knative/net-kourier) which was developed originally by 3Scale which is now a part of Red Hat. Kourier is now maintained by the Knative project itself. Other networking options are Ambassador, Contour, Glue, and Kong. 
+Knative [requires a networking layer with an Ingress](https://knative.dev/docs/admin/install/serving/install-serving-with-yaml/#install-a-networking-layer) that is not part of the Knative installation itself. There are several options, Istio is one of them, another one is [Kourier](https://github.com/knative/net-kourier) which was developed originally by 3Scale which is now a part of Red Hat. Kourier is now maintained by the Knative project itself. Other networking options are Ambassador, Contour, Glue, and Kong. 
 
 We will use Kourier in this lab, you can find more information about Kourier in this [Red Hat blog](https://developers.redhat.com/blog/2020/06/30/kourier-a-lightweight-knative-serving-ingress/).
 
@@ -36,7 +36,7 @@ The following commands install Kourier and enable its Knative integration.
 1. Install the Knative Kourier controller:
 
       ```
-      kubectl apply --filename https://github.com/knative/net-kourier/releases/download/v0.21.0/kourier.yaml
+      kubectl apply -f https://github.com/knative/net-kourier/releases/download/v0.26.0/kourier.yaml
       ```
 
 1. Configure Knative Serving to use Kourier by default:
@@ -56,7 +56,31 @@ The following commands install Kourier and enable its Knative integration.
 
       Result should show the external IP as `<pending>` which is normal for Minikube.
 
-### Configure DNS
+1. Verify the installation:
+
+   List all pods in the knative-serving namespace:
+
+
+   ```
+   kubectl get pods -n knative-serving
+   ```
+
+   All pods should be in status "Running":
+
+   ```
+      NAME                                      READY   STATUS    RESTARTS   AGE
+      activator-848b54764c-lf5tz                1/1     Running   0          5m14s
+      autoscaler-6c9d98bfc7-5wbw6               1/1     Running   0          5m14s
+      controller-74cffd4749-njgv7               1/1     Running   0          5m14s
+      domain-mapping-5557d5d995-nq49r           1/1     Running   0          5m14s
+      domainmapping-webhook-646496fddc-c7258    1/1     Running   0          5m13s
+      net-kourier-controller-85657dfb57-7b7t5   1/1     Running   0          3m39s
+      webhook-55868d7455-hng8l                  1/1     Running   0          5m13s
+   ```   
+
+         
+
+### Configure "Magic" DNS
 
 Knative ships a simple Kubernetes Job called “default domain” that will configure Knative Serving to use [sslip.io](http://sslip.io/){:target="_blank"} as the default DNS suffix.
 
@@ -65,10 +89,10 @@ Knative ships a simple Kubernetes Job called “default domain” that will conf
 1. Apply the Kubernetes job:
 
       ```
-      kubectl apply --filename https://github.com/knative/serving/releases/download/v0.21.0/serving-default-domain.yaml
+      kubectl apply -f https://github.com/knative/serving/releases/download/v0.26.0/serving-default-domain.yaml
       ```
 
-1. Create a Minikube tunnel. Enter the following command in another terminal session:
+2. Create a Minikube tunnel. Enter the following command in **another** terminal session:
 
       ```
       minikube tunnel
@@ -76,7 +100,9 @@ Knative ships a simple Kubernetes Job called “default domain” that will conf
 
       This requires sudo rights.
 
-1. Check the External IP again:
+      **Keep this session open and 'minikube tunnel' running during the whole workshop!**
+
+3. Check the External IP again:
 
       ```
       kubectl --namespace kourier-system get service kourier
@@ -104,5 +130,5 @@ Knative ships a simple Kubernetes Job called “default domain” that will conf
 
 ---
 
-__Continue with the next part [3 - Deploy a Knative Service](../workshop/3-DeployKnativeService.md)__      
+__Continue with the next part [3 - Deploy a Knative Service](../workshop/3-DeployKnativeService)__      
 

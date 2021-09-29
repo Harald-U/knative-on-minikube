@@ -5,11 +5,13 @@ metadata:
 spec:
   template:
     metadata:
+      # This is the name of our new "Revision," it must follow the convention {service-name}-{revision-name}
       name: helloworld-v2
     spec:
       containers:
-        - image: docker.io/ibmcom/kn-helloworld
+        - image: gcr.io/knative-samples/helloworld-go
+          ports:
+            - containerPort: 8080
           env:
             - name: TARGET
-              value: "HelloWorld Sample v2 -- UPDATED"
-
+              value: "World V2 -- UPDATED"

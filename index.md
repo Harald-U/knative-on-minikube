@@ -5,9 +5,9 @@ layout: default
 
 _This workshop is an adaptation of the [Knative Hands-on Workshop](https://harald-u.github.io/knative-handson-workshop/) I created for IBM._
 
-_The IBM Workshop uses preprovisioned Kubernetes or OpenShift clusters on the IBM Cloud based on IBM Cloud Kubernetes Service (IKS) or Red OpenShift on IBM Cloud (ROKS)._
+_The original IBM Workshop uses preprovisioned Kubernetes or OpenShift clusters on the IBM Cloud based on IBM Cloud Kubernetes Service (IKS) or Red OpenShift on IBM Cloud (ROKS)._
 
-_This version of the workshop is based on [Minikube](https://minikube.sigs.k8s.io/docs/) running on your own workstation._  
+_This modified version of the workshop is based on [Minikube](https://minikube.sigs.k8s.io/docs/) running on your own workstation._  
 
 ---
 
@@ -32,13 +32,13 @@ It has two distinct components, originally it were three. The third was called K
 
 This workshop will **focus on Knative Serving** and will cover the following topics, work through them in sequence:
 
-- [1 - Setup the work environment](workshop/1-Prereqs.md)
-- [2 - Install Knative](workshop/2-InstallKnative.md)
-- [3 - Deploy a Knative Service](workshop/3-DeployKnativeService.md)
-- [4 - Create a Knative Revision](workshop/4-Revision.md)
-- [5 - Traffic Management](workshop/5-TrafficManagement.md)
-- [6 - Auto-Scaling](workshop/6-Scaling.md)
-- [7 - Debugging Tips](workshop/7-Debugging.md)
+- [1 - Setup the work environment](workshop/1-Prereqs)
+- [2 - Install Knative](workshop/2-InstallKnative)
+- [3 - Deploy a Knative Service](workshop/3-DeployKnativeService)
+- [4 - Create a Knative Revision](workshop/4-Revision)
+- [5 - Traffic Management](workshop/5-TrafficManagement)
+- [6 - Auto-Scaling](workshop/6-Scaling)
+- [7 - Debugging Tips](workshop/7-Debugging)
 
 To complete this workshop, basic understanding of Kubernetes itself and application deployment on Kubernetes is instrumental!
 

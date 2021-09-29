@@ -18,6 +18,7 @@ metadata:
 spec:
   template:
     metadata:
+      # This is the name of our new "Revision," it must follow the convention {service-name}-{revision-name}
       name: helloworld-v3
       annotations:
         # the minimum number of pods to scale down to
@@ -28,10 +29,12 @@ spec:
         autoscaling.knative.dev/target: "1"
     spec:
       containers:
-        - image: docker.io/ibmcom/kn-helloworld
+        - image: gcr.io/knative-samples/helloworld-go
+          ports:
+            - containerPort: 8080
           env:
             - name: TARGET
-              value: "HelloWorld Sample v3 -- Scaling"
+              value: "World V3 -- Scaling"
 ```
 * `minScale: "1"` prevents scale to zero, there will always be at least 1 pod active.
 * `maxScale: "5"` will allow to start a maximum of 5 pods.
@@ -49,7 +52,7 @@ You can also [scale based on CPU usage or number of requests](https://knative.de
    
 1. In the first terminal session generate some load (remember to use your own IP address here!):
    ```
-   hey -z 30s -c 50 http://helloworld.kntest.10.100.59.30.xip.io
+   hey -z 30s -c 50 http://helloworld.kntest.10.100.59.30.sslip.io
    ```
   `hey` is a simple HTTP load generator, `-z 30` means 'run for 30 seconds' and `-c 50` starts 50 concurrent sessions.
 
@@ -86,4 +89,4 @@ You can also [scale based on CPU usage or number of requests](https://knative.de
  
 ---
 
-__Continue with the last part [7 - Knative Debugging Tips](7-Debugging.md)__
+__Continue with the last part [7 - Knative Debugging Tips](7-Debugging)__

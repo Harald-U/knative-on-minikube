@@ -48,9 +48,9 @@ Those additional 7 lines of code will create a 75% / 25% distribution between re
    kubectl apply -f service-v2-canary.yaml
    ```
    
-1. Still in the first terminal session, execute the `curl` within a `watch`, e.g.:
+1. Still in the first terminal session, execute the `curl` within a `watch`, but of course you need to use the IP address of your environment!
    ```
-   watch curl http://helloworld.kntest.10.103.104.209.xip.io  
+   watch curl http://helloworld.kntest.10.103.104.209.sslip.io  
    ```
    
    Check the second terminal session. There are now two pods, one for each revision:
@@ -67,4 +67,4 @@ Those additional 7 lines of code will create a 75% / 25% distribution between re
    
 ---
 
-__Continue with the next part [6 - Knative Auto-Scaling](6-Scaling.md)__
+__Continue with the next part [6 - Knative Auto-Scaling](6-Scaling)__

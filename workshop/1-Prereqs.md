@@ -7,7 +7,9 @@ layout: default
 
 The instructions will work on Linux and macOS, they have not been tested on Windows.
 
-The [Minikube Getting Started](https://minikube.sigs.k8s.io/docs/start/) has detailled instructions on how to install Minikube for the different platforms.
+The [Minikube Getting Started](https://minikube.sigs.k8s.io/docs/start/) has detailled instructions on how to install Minikube for the different platforms. 
+
+At the time of this writing, Minikube was at v1.23.0. This workshop is **based on Knative v0.26**.
 
 ## Step 1 - Install required tools:
 
@@ -19,7 +21,7 @@ Minikube|[https://minikube.sigs.k8s.io/docs/start/](https://minikube.sigs.k8s.io
 git CLI|[https://git-scm.com/downloads](https://git-scm.com/downloads){:target="_blank"} 
 kubectl|[https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/){:target="_blank"}
 kn|[https://knative.dev/docs/install/install-kn/](https://knative.dev/docs/install/install-kn/){:target="_blank"}
-hey|(HTTP Load generator) [https://github.com/rakyll/hey](https://github.com/rakyll/hey){:target="_blank"}
+hey (HTTP Load generator)|[https://github.com/rakyll/hey](https://github.com/rakyll/hey){:target="_blank"}
 
 ### Step 2: Download the code from this repository
 
@@ -44,14 +46,14 @@ minikube start --cpus 2 --memory 4096 --driver=docker
 Output:
 
 ```
-😄  minikube v1.16.0 on Linuxmint 20.1
+😄  minikube v1.23.0 auf Linuxmint 20.2
 ✨  Using the docker driver based on user configuration
 👍  Starting control plane node minikube in cluster minikube
 🚜  Pulling base image ...
-💾  Downloading Kubernetes v1.20.0 preload ...
+💾  Downloading Kubernetes v1.22.1 preload ...
     > preloaded-images-k8s-v8-v1....: 491.00 MiB / 491.00 MiB  100.00% 3.41 MiB
 🔥  Creating docker container (CPUs=2, Memory=4096MB) ...
-🐳  Preparing Kubernetes v1.20.0 on Docker 20.10.0 ...
+🐳  Preparing Kubernetes v1.22.1 on Docker 20.10.8 ...
     ▪ Generating certificates and keys ...
     ▪ Booting up control plane ...
     ▪ Configuring RBAC rules ...
@@ -66,4 +68,4 @@ The [Minikube Getting Started](https://minikube.sigs.k8s.io/docs/start/) has ins
 
 ---
 
-**Continue with** [2 - Install Knative](../workshop/2-InstallKnative.md)
+**Continue with** [2 - Install Knative](../workshop/2-InstallKnative)
