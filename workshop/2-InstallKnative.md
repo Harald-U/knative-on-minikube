@@ -9,6 +9,8 @@ A Minikube "cluster" has been created in the previous section.
 
 Installation of Knative is covered in the [Knative Administartion guide](https://knative.dev/docs/admin/install/serving/install-serving-with-yaml/). We will install Knative Serving in this section using Kourier as networking layer.
 
+**Important:** Check the output of every command that you executed for errors! Do not blindly run command after command.
+
 ### Installing the Serving component 
 
 1. Install the Knative Serving Custom Resource Definitions (aka CRDs):
@@ -63,6 +65,7 @@ The following commands install Kourier and enable its Knative integration.
 
    ```
    kubectl get pods -n knative-serving
+   kubectl get pods -n kourier-system
    ```
 
    All pods should be in status "Running":
@@ -76,6 +79,9 @@ The following commands install Kourier and enable its Knative integration.
       domainmapping-webhook-646496fddc-c7258    1/1     Running   0          5m13s
       net-kourier-controller-85657dfb57-7b7t5   1/1     Running   0          3m39s
       webhook-55868d7455-hng8l                  1/1     Running   0          5m13s
+
+      NAME                                      READY   STATUS    RESTARTS   AGE
+      3scale-kourier-gateway-77849dcc96-hqd99   1/1     Running   0          64s
    ```   
 
          
@@ -92,13 +98,13 @@ Knative ships a simple Kubernetes Job called “default domain” that will conf
       kubectl apply -f https://github.com/knative/serving/releases/download/v0.26.0/serving-default-domain.yaml
       ```
 
-2. Create a Minikube tunnel. Enter the following command in **another** terminal session:
+2. Create a Minikube tunnel, this requires administrator rights on your workstation. 
+   
+   Enter the following command in **another** terminal session:
 
       ```
       minikube tunnel
-      ```
-
-      This requires sudo rights.
+      ```      
 
       **Keep this session open and 'minikube tunnel' running during the whole workshop!**
 
