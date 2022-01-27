@@ -9,11 +9,11 @@ The instructions will work on Linux and macOS, they have not been tested on Wind
 
 The [Minikube Getting Started](https://minikube.sigs.k8s.io/docs/start/) has detailled instructions on how to install Minikube for the different platforms. 
 
-At the time of this writing, Minikube was at v1.23.0. This workshop is **based on Knative v0.26**.
+At the time of this writing, Minikube was at v1.24.0. This workshop is **based on Knative v1.1.0**.
 
 ## Step 1 - Install required tools:
 
-To run the workshop completely off your own workstation you need the following tools (depending on the track you select):
+To run the workshop completely off your own workstation you need the following tools:
 
 Tool  |Source       
 ----------------|----
@@ -26,7 +26,7 @@ hey (HTTP Load generator)|[https://github.com/rakyll/hey](https://github.com/rak
 ### Step 2: Download the code from this repository
 
 ```
-git clone git@github.com:Harald-U/knative-on-minikube.git
+git clone https://github.com/Harald-U/knative-on-minikube.git
 cd knative-on-minikube/code/
 ```
 
@@ -46,7 +46,7 @@ minikube start --cpus 2 --memory 4096 --driver=docker
 Output:
 
 ```
-😄  minikube v1.23.0 auf Linuxmint 20.2
+😄  minikube v1.24.0 auf Linuxmint 20.2
 ✨  Using the docker driver based on user configuration
 👍  Starting control plane node minikube in cluster minikube
 🚜  Pulling base image ...
