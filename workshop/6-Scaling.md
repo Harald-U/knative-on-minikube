@@ -85,8 +85,7 @@ You can also [scale based on CPU usage or number of requests](https://knative.de
    All of the requests took less than half a second. Thats because one pod is always started and can take the initial brunt of the requests.
   
 **This concludes the main part of the Knative workshop.**   
-
  
 ---
 
-__Continue with the last part [7 - Knative Debugging Tips](7-Debugging)__
+__Continue with the optional last part [7 - Knative Debugging Tips](7-Debugging)__

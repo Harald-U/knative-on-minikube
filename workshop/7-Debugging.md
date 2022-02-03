@@ -73,3 +73,11 @@ There are new places in your environment to look for information as to why a Kna
     ---
     
     There is more information on [Debugging issues with your application](https://knative.dev/docs/serving/debugging-application-issues/){:target="_blank"} on the Knative docs site.
+
+# Clean up
+
+If you no longer need your Minikube cluster you can simply delete it with:
+
+```
+$ minikube delete
+```
