@@ -5,6 +5,16 @@ layout: default
 
 # 6 - Knative Auto-Scaling
 
+**Note:** 
+
+To complete this lab, you need `bombardier`, a command line HTTP benchmarking tool. You can find it [here](https://github.com/codesenberg/bombardier/releases). Download the version that goes with your OS into your current directory. Rename it to something simpler, e.g. 
+
+```
+$ mv bombardier-linux-amd64 bombardier
+```
+
+**/Note**
+
 Scale to zero is an interesting feature but without additional tricks (like pre-started containers or pods, which aren't available in Knative) it can be annoying because users may have to wait until a new pod is started and ready to receive requests. Or it can lead to problems like time-outs in a microservices architecture if a scaled-to-zero service is called by another service and has to be started first and takes some time to start (e.g. traditional Java based service). 
 
 On the other hand, if our application / microservice is hit hard with many requests, a single pod may not be sufficient to serve them and we may need to scale up. And preferably scale up and down automatically.
@@ -50,11 +60,27 @@ You can also [scale based on CPU usage or number of requests](https://knative.de
    ```
    You should notice that 1 pod is running, and running longer than 60 seconds. This is the result of `minScale: "1"`. Scale to zero has been turned off.
    
-1. In the first terminal session generate some load (remember to use your own IP address here!):
+2. In the first terminal session generate some load. The `bombardier` benchmarking tool must be in your current directory (see top of this section). Remember to use your own IP address here!
+3. 
    ```
-   hey -z 30s -c 50 http://helloworld.kntest.10.100.59.30.sslip.io
+   $ kn service list helloworld
+    NAME         URL                                              LATEST          AGE   CONDITIONS   READY   REASON
+    helloworld   http://helloworld.kntest.10.104.55.31.sslip.io   helloworld-v3   31m   3 OK / 3     True   
+
+   $ ./bombardier -c 50 -d 60s http://helloworld.kntest.10.104.55.31.sslip.io/
+    Bombarding http://helloworld.kntest.10.104.55.31.sslip.io:80/ for 1m0s using 50 connection(s)
+    [=========================================================================] 1m0s
+    Done!
+    Statistics        Avg      Stdev        Max
+      Reqs/sec       462.21     552.42    5196.67
+      Latency      108.29ms    65.62ms   527.32ms
+      HTTP codes:
+        1xx - 0, 2xx - 27726, 3xx - 0, 4xx - 0, 5xx - 0
+        others - 0
+      Throughput:   127.96KB/s
    ```
-  `hey` is a simple HTTP load generator, `-z 30` means 'run for 30 seconds' and `-c 50` starts 50 concurrent sessions.
+
+  `bombardier` is a simple HTTP load generator, `-d 60s` means 'run for 60 seconds' and `-c 50` starts 50 concurrent sessions.
 
    
    Switch over to session 2 and watch 4 more pods being started.
@@ -66,23 +92,7 @@ You can also [scale based on CPU usage or number of requests](https://knative.de
    helloworld-v3-deployment-7c6bd88f95-m75x4    2/2     Running   0          9m50s
    helloworld-v3-deployment-7c6bd88f95-zftw5    2/2     Running   0          48s
    ```
-5. Check the output of the `hey`command, for example the histogram:
-   ```
-    Response time histogram:
-      0.002 [1]     |
-      0.039 [4079]  |■■■■■■■■■■■■■■■
-      0.077 [66]    |
-      0.114 [10744] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-      0.151 [320]   |■
-      0.189 [921]   |■■■
-      0.226 [841]   |■■■
-      0.263 [0]     |
-      0.301 [97]    |
-      0.338 [28]    |
-      0.375 [1]     |
 
-   ```
-   All of the requests took less than half a second. Thats because one pod is always started and can take the initial brunt of the requests.
   
 **This concludes the main part of the Knative workshop.**   
  

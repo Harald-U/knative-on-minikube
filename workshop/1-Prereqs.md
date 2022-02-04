@@ -21,7 +21,7 @@ Minikube|[https://minikube.sigs.k8s.io/docs/start/](https://minikube.sigs.k8s.io
 git CLI|[https://git-scm.com/downloads](https://git-scm.com/downloads){:target="_blank"} 
 kubectl|[https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/){:target="_blank"}
 kn|[https://knative.dev/docs/install/install-kn/](https://knative.dev/docs/install/install-kn/){:target="_blank"}
-hey (HTTP Load generator)|[https://github.com/rakyll/hey](https://github.com/rakyll/hey){:target="_blank"}
+bombardier (HTTP Load generator)|[https://github.com/codesenberg/bombardier/releases](https://github.com/codesenberg/bombardier/releases){:target="_blank"}
 
 ### Step 2: Download the code from this repository
 
