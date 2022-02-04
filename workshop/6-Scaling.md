@@ -7,7 +7,7 @@ layout: default
 
 **Note:** 
 
-To complete this lab, you need `bombardier`, a command line HTTP benchmarking tool. You can find it [here](https://github.com/codesenberg/bombardier/releases). Download the version that goes with your OS into your current directory. Rename it to something simpler, e.g. 
+To complete this lab, you need `bombardier`, a command line HTTP benchmarking tool. You can find it [here](https://github.com/codesenberg/bombardier/releases){:target="_blank"}. Download the version that goes with your OS into your current directory. Rename it to something simpler, e.g. 
 
 ```
 $ mv bombardier-linux-amd64 bombardier
