@@ -62,9 +62,8 @@ You can also [scale based on CPU usage or number of requests](https://knative.de
    ```
    You should notice that 1 pod is running, and running longer than 60 seconds. This is the result of `minScale: "1"`. Scale to zero has been turned off.
    
-2. In the first terminal session generate some load. The `bombardier` benchmarking tool must be in your current directory (see top of this section). Remember to use your own IP address here!
+2. In the first terminal session generate some load. The command below specifies "local directory" (./bombardier), this means that the `bombardier` benchmarking tool must be in your current directory. If you moved it to a directory in your PATH, call it without `./` (see top of this section). Remember to use your own URL here!
    
-
    ```
    $ kn service list helloworld
     NAME         URL                                              LATEST          AGE   CONDITIONS   READY   REASON
