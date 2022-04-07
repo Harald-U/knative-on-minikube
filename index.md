@@ -3,6 +3,8 @@ title: Overview
 layout: default
 ---
 
+# Overview
+
 _This workshop is an adaptation of the [Knative Hands-on Workshop](https://harald-u.github.io/knative-handson-workshop/) I created for IBM._
 
 _The original IBM Workshop uses preprovisioned Kubernetes or OpenShift clusters on the IBM Cloud based on IBM Cloud Kubernetes Service (IKS) or Red OpenShift on IBM Cloud (ROKS)._
@@ -11,9 +13,7 @@ _This modified version of the workshop is based on [Minikube](https://minikube.s
 
 ---
 
-# Knative Hands-on Workshop
-
-## Why is deploying a Knative service easier than a Kubernetess deployment? 
+## Why is deploying a Knative service easier than a Kubernetes deployment? 
 
 ![Knative Logo](images/knative-logo.png)
 
