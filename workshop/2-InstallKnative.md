@@ -16,13 +16,13 @@ Installation of Knative is covered in the [Knative Administartion guide](https:/
 1. Install the Knative Serving Custom Resource Definitions (aka CRDs):
 
       ```sh
-      kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.1.0/serving-crds.yaml
+      kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.8.3/serving-crds.yaml
       ```
 
 1. Install the core components of Knative Serving:
 
       ```sh
-      kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.1.0/serving-core.yaml
+      kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.8.3/serving-core.yaml
       ```
 
 ### Installing Kourier as networking layer
@@ -38,7 +38,7 @@ The following commands install Kourier and enable its Knative integration.
 1. Install the Knative Kourier controller:
 
       ```
-      kubectl apply -f https://github.com/knative/net-kourier/releases/download/knative-v1.1.0/kourier.yaml
+      kubectl apply -f https://github.com/knative/net-kourier/releases/download/knative-v1.8.1/kourier.yaml
       ```
 
 1. Configure Knative Serving to use Kourier by default:
@@ -46,8 +46,8 @@ The following commands install Kourier and enable its Knative integration.
       ```
       kubectl patch configmap/config-network \
       --namespace knative-serving \
-       --type merge \
-       --patch '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
+      --type merge \
+      --patch '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
       ```
 
 1. Check the External IP:
@@ -95,7 +95,7 @@ Knative ships a simple Kubernetes Job called “default domain” that will conf
 1. Apply the Kubernetes job:
 
       ```
-      kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.1.0/serving-default-domain.yaml
+      kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.8.3/serving-default-domain.yaml
       ```
 
 2. Create a Minikube tunnel, this requires administrator rights on your workstation. 
@@ -127,14 +127,16 @@ Knative ships a simple Kubernetes Job called “default domain” that will conf
       Result, e.g.:
 
       ```
-      PING 10.103.104.209.xip.io (10.103.104.209) 56(84) bytes data.
+      PING 10.103.104.209.sslip.io (10.103.104.209) 56(84) bytes data.
       From 192.168.49.2 (192.168.49.2) icmp_seq=2 Host redirect (New nexthop: 1.49.168.192 (1.49.168.192))
       ```
 
       How does this work: A DNS request for e.g. helloworld.10.103.104.209.sslip.io will resolve to IP address 10.103.104.209. This IP address is made available by `minikube tunnel` and is answered via the Kourier ingress gateway. It's magic :-)
 
+      **NOTE**: If the PING of the sslip.io address fails (name or service unkown, DNS request timeout, etc.), most like your router is configured to protect against DNS Rebind attacks. For AVM Fritz!Box follow [these directions](https://avm.de/service/wissensdatenbank/dok/FRITZ-Box-7390/663_DNS-Auflosung-privater-IP-Adressen-nicht-moglich/). 
 
-**Note:** If you want/need to quickly install Knative into your Minikube cluster, use the `code/install/install-knative.sh` shell script.
+      **Note 2**: If this still does not work, use the information provided by the Knative documentation [here](https://knative.dev/docs/install/yaml-install/serving/install-serving-with-yaml/#configure-dns) in section "Configure DNS", tab "Temporary DNS". You cannot access the Knative examples in the browser, though, only `curl` will work as stated.
+
 
 ---
 

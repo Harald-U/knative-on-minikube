@@ -9,18 +9,20 @@ The instructions will work on Linux and macOS, they have not been tested on Wind
 
 The [Minikube Getting Started](https://minikube.sigs.k8s.io/docs/start/) has detailled instructions on how to install Minikube for the different platforms. 
 
-At the time of this writing, Minikube was at v1.24.0. This workshop is **based on Knative v1.1.0**.
+At the time of this writing, Minikube was at v1.28.0. 
+
+This workshop is **based on Knative v1.8.3**.
 
 ## Step 1 - Install required tools:
 
-To run the workshop completely off your own workstation you need the following tools:
+To run the workshop completely off your own workstation you need the following tools. They have been installed on the **bwLehrPool** environment, already.
 
 Tool  |Source       
 ----------------|----
 Minikube|[https://minikube.sigs.k8s.io/docs/start/](https://minikube.sigs.k8s.io/docs/start/){:target="_blank"}
 git CLI|[https://git-scm.com/downloads](https://git-scm.com/downloads){:target="_blank"} 
 kubectl|[https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/){:target="_blank"}
-kn|[https://knative.dev/docs/install/install-kn/](https://knative.dev/docs/install/install-kn/){:target="_blank"}
+kn|[https://github.com/knative/client/releases](https://github.com/knative/client/releases){:target="_blank"}
 bombardier (HTTP Load generator)|[https://github.com/codesenberg/bombardier/releases](https://github.com/codesenberg/bombardier/releases){:target="_blank"}
 
 ### Step 2: Download the code from this repository
@@ -29,6 +31,8 @@ bombardier (HTTP Load generator)|[https://github.com/codesenberg/bombardier/rele
 git clone https://github.com/Harald-U/knative-on-minikube.git
 cd knative-on-minikube/code/
 ```
+> **Note: On bwLehrpool** change into the PERSISTENCE directory before cloning the repository.
+
 
 ### Step 3: Start a Minikube "cluster"
 
@@ -40,7 +44,7 @@ The Docker driver allows you to install Kubernetes into an existing Docker insta
 minikube start --cpus 2 --memory 4096 --driver=docker
 ```
 
-### Step 3 on bwLehrpool
+### Step 3: Start a Minikube "cluster" on bwLehrpool
 
 There may be a "leftover" (and damaged) Minikube instance that was present when the VMware image for the Linux environment was built.  This may cause problems. Enter the following command before you start this workshop:
 

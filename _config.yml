@@ -1,7 +1,7 @@
 theme: jekyll-theme-minimal
 title: Knative on Minikube
 description: Run Knative on Minikube on your own notebook 
-updated: 7.4.2022
+updated: 13.1.2023
 show_downloads: False
 logo: /images/knative-logo.png
 navigation:

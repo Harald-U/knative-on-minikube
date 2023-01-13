@@ -130,13 +130,13 @@ The 'spec' part is 'classic' Kubernetes, it describes the location and name of t
    Output:
    ```
    NAME         URL                                               LATEST          AGE   CONDITIONS   READY   REASON
-   helloworld   http://helloworld.kntest.10.103.104.209.xip.io   helloworld-v1   55s   3 OK / 3     True  
+   helloworld   http://helloworld.kntest.10.103.104.209.sslip.io   helloworld-v1   55s   3 OK / 3     True  
    ```
 
 1. Copy the URL ('http://helloworld ...') and open it with `curl` or in your browser:
 
    ```
-   curl http://helloworld.kntest.10.103.104.209.xip.io
+   curl http://helloworld.kntest.10.103.104.209.sslip.io
    ```
    Output:
    ```
