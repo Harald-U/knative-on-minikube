@@ -1,5 +1,11 @@
 # Workshop: Knative on Minikube
 
+Dieser Workshop dient als Übung für meine Vorlesung "Verteilte Systeme" an der Dualen Hochschule Baden-Württemberg (DHBW) in Stuttgart.
+
+This workshop serves as an exercise for my lecture "Distributed Systems" at the Cooperative State University Baden-Wuerttemberg (DHBW) in Stuttgart.
+
+---
+
 This workshop is an adaptation of the [Knative Hands-on Workshop](https://harald-u.github.io/knative-handson-workshop/) I created for IBM.
 
 The IBM Workshop uses preprovisioned Kubernetes or OpenShift clusters on the IBM Cloud based on IBM Cloud Kubernetes Service (IKS) or Red OpenShift on IBM Cloud.

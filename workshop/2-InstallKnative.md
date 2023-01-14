@@ -156,7 +156,16 @@ Knative ships a simple Kubernetes Job called “default domain” that will conf
             `curl -H "Host: helloworld.kntest.example.com" http://10.97.35.18`
 
             With this method, you call the service on the IP address of the Kourier service (the ingress) and set the hostname in the IP header of the call using the `-H` flag.
----
+            
+### Quick Install
+
+Now that you have learned how to install Knative onto a Kubernetes cluster here is the fast path:
+
+In the code/install directory is a (Bash) script that will install Knative, Kourier, and one of the two DNS options (sslip.io or example.com):
+
+      `install/install-knative.sh`
+
+This should be especially helpful if you loose your bwLehrPool session and have to start over again. :-)
 
 __Continue with the next part [3 - Deploy a Knative Service](../workshop/3-DeployKnativeService)__      
 
