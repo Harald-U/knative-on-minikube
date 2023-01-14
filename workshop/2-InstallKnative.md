@@ -133,11 +133,29 @@ Knative ships a simple Kubernetes Job called “default domain” that will conf
 
       How does this work: A DNS request for e.g. helloworld.10.103.104.209.sslip.io will resolve to IP address 10.103.104.209. This IP address is made available by `minikube tunnel` and is answered via the Kourier ingress gateway. It's magic :-)
 
-      **NOTE**: If the PING of the sslip.io address fails (name or service unkown, DNS request timeout, etc.), most like your router is configured to protect against DNS Rebind attacks. For AVM Fritz!Box follow [these directions](https://avm.de/service/wissensdatenbank/dok/FRITZ-Box-7390/663_DNS-Auflosung-privater-IP-Adressen-nicht-moglich/). 
+      **NOTE**: If the PING of the sslip.io address fails (name or service unkown, DNS request timeout, etc.), most likely your router is configured to protect against DNS Rebind attacks. For AVM Fritz!Box follow [these directions](https://avm.de/service/wissensdatenbank/dok/FRITZ-Box-7390/663_DNS-Auflosung-privater-IP-Adressen-nicht-moglich/). This remedy requires a restart of your Fritz!Box. Even after a restart it took a while in my environment before a PING of a sslip.io address worked. Be patient! At the time of this writing it worked without problems on bwLehrPool.
 
-      **Note 2**: If this still does not work, use the information provided by the Knative documentation [here](https://knative.dev/docs/install/yaml-install/serving/install-serving-with-yaml/#configure-dns) in section "Configure DNS", tab "Temporary DNS". You cannot access the Knative examples in the browser, though, only `curl` will work as stated.
+      **Note 2**: If this still does not work, use the information provided by the Knative documentation [here](https://knative.dev/docs/install/yaml-install/serving/install-serving-with-yaml/#configure-dns) in section "Configure DNS", tab "Temporary DNS". With this method you cannot access the Knative examples in the browser, though, only `curl` will work like this:
+
+      1. Use the External IP address of the `kourier`service
+   
+            ```
+            kubectl --namespace kourier-system get service kourier
+
+            NAME      TYPE           CLUSTER-IP    EXTERNAL-IP   PORT(S)                      AGE
+            kourier   LoadBalancer   10.97.35.18   10.97.35.18   80:32275/TCP,443:30793/TCP   8m37s
+            ```
+
+            In this example it would be `10.97.35.18` 
 
 
+      2. Use the URL from `kn service list`, in this workshop this should always be `http://helloworld.kntest.example.com`
+
+      3. Call the URL like this:
+   
+            `curl -H "Host: helloworld.kntest.example.com" http://10.97.35.18`
+
+            With this method, you call the service on the IP address of the Kourier service (the ingress) and set the hostname in the IP header of the call using the `-H` flag.
 ---
 
 __Continue with the next part [3 - Deploy a Knative Service](../workshop/3-DeployKnativeService)__      

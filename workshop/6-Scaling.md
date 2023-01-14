@@ -69,7 +69,7 @@ You can also [scale based on CPU usage or number of requests](https://knative.de
     NAME         URL                                              LATEST          AGE   CONDITIONS   READY   REASON
     helloworld   http://helloworld.kntest.10.104.55.31.sslip.io   helloworld-v3   31m   3 OK / 3     True   
 
-   $ ./bombardier -c 50 -d 60s http://helloworld.kntest.10.104.55.31.sslip.io/
+   $ bombardier -c 50 -d 60s http://helloworld.kntest.10.104.55.31.sslip.io/
     Bombarding http://helloworld.kntest.10.104.55.31.sslip.io:80/ for 1m0s using 50 connection(s)
     [=========================================================================] 1m0s
     Done!
@@ -81,6 +81,12 @@ You can also [scale based on CPU usage or number of requests](https://knative.de
         others - 0
       Throughput:   127.96KB/s
    ```
+
+   **Note:** If you have to use the example.com domain (sslip.io doesn't work for you), you can call `bombardier` with a hostname in the header like this:
+
+      `bombardier -c 50 -d 60s -H "Host: helloworld.kntest.example.com" http://10.97.35.18`
+
+   Of course your IP address will be different!   
 
   `bombardier` is a simple HTTP load generator, `-d 60s` means 'run for 60 seconds' and `-c 50` starts 50 concurrent sessions.
 

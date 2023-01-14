@@ -1,8 +1,11 @@
 #!/bin/sh
 
 # Knative version to be installed
-knver="knative-v1.1.0"
+knver="knative-v1.8.3"
+# Kourier version to be installed
+kouver="knative-v1.8.1"
 
+echo "Installing Knative $knver and Kourier $kouver"
 
 echo "----------------------------------------------------------------------------------------------------------"
 echo ">> Checking availability of cluster"
@@ -21,6 +24,7 @@ echo "--------------------------------------------------------------------------
 echo ">> Knative CRDs"
 echo "----------------------------------------------------------------------------------------------------------"
 kubectl apply -f https://github.com/knative/serving/releases/download/$knver/serving-crds.yaml
+sleep 15
 
 echo "----------------------------------------------------------------------------------------------------------"
 echo ">> Knative Core"
@@ -30,21 +34,26 @@ kubectl apply -f https://github.com/knative/serving/releases/download/$knver/ser
 echo "----------------------------------------------------------------------------------------------------------"
 echo ">> Wait for a moment for everything to settle ..."
 echo ""
-sleep 45
+sleep 30
 
 echo ""
-echo ">> Knative Kourier networking layer"
+echo ">> Knative Kourier (version $kouver) networking layer"
 echo "----------------------------------------------------------------------------------------------------------"
-kubectl apply -f https://github.com/knative/net-kourier/releases/download/$knver/kourier.yaml
+kubectl apply -f https://github.com/knative/net-kourier/releases/download/$kouver/kourier.yaml
 kubectl patch configmap/config-network \
   --namespace knative-serving \
   --type merge \
   --patch '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
 
+#echo "----------------------------------------------------------------------------------------------------------"
+#echo ">> Configure sslip.io DNS"
+#echo "----------------------------------------------------------------------------------------------------------"
+#kubectl apply -f https://github.com/knative/serving/releases/download/$knver/serving-default-domain.yaml
+
 echo "----------------------------------------------------------------------------------------------------------"
-echo ">> Configure sslip.io DNS"
+echo ">> Configure example.com domain"
 echo "----------------------------------------------------------------------------------------------------------"
-kubectl apply -f https://github.com/knative/serving/releases/download/$knver/serving-default-domain.yaml
+kubectl patch configmap/config-domain --namespace knative-serving --type merge --patch '{"data":{"example.com":""}}'
 
 echo "----------------------------------------------------------------------------------------------------------"
 echo ">> Display Knative and Kourier pods"
