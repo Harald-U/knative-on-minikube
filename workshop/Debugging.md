@@ -1,9 +1,9 @@
 ---
-title: 7 - Debugging Tips
+title: Debugging Tips
 layout: default
 ---
 
-# 7 - Knative Debugging Tips
+# Knative Debugging Tips
 
 There are new places in your environment to look for information as to why a Knative service doesn’t work. Here is a collection of helpful commands and examples.
 

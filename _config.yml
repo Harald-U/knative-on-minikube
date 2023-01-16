@@ -18,6 +18,6 @@ navigation:
     url: workshop/5-TrafficManagement
   - title: 6 - Auto-Scaling
     url: workshop/6-Scaling
-  - title: 7 - Debugging Tips
-    url: workshop/7-Debugging
+  - title: Debugging Tips
+    url: workshop/Debugging
 

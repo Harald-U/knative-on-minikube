@@ -106,4 +106,4 @@ You can also [scale based on CPU usage or number of requests](https://knative.de
  
 ---
 
-__Continue with the optional last part [7 - Knative Debugging Tips](7-Debugging)__
+__Continue with the optional last part [Knative Debugging Tips](Debugging)__
