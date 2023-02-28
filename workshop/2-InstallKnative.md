@@ -131,6 +131,8 @@ Knative ships a simple Kubernetes Job called “default domain” that will conf
       From 192.168.49.2 (192.168.49.2) icmp_seq=2 Host redirect (New nexthop: 1.49.168.192 (1.49.168.192))
       ```
 
+      Terminate the PING with Ctl-C (Cmd-C) once you see that it works = is able to resolve to a local address.
+
       How does this work: A DNS request for e.g. helloworld.10.103.104.209.sslip.io will resolve to IP address 10.103.104.209. This IP address is made available by `minikube tunnel` and is answered via the Kourier ingress gateway. It's magic :-)
 
       **NOTE**: If the PING of the sslip.io address fails (name or service unkown, DNS request timeout, etc.), most likely your router is configured to protect against DNS Rebind attacks. For AVM Fritz!Box follow [these directions](https://avm.de/service/wissensdatenbank/dok/FRITZ-Box-7390/663_DNS-Auflosung-privater-IP-Adressen-nicht-moglich/). This remedy seems to require a restart of your Fritz!Box. I own a Fritz!Box and it still doesn't work for me.  **At the time of this writing it worked without problems on bwLehrPool.**
