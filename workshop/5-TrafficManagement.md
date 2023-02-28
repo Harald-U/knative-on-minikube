@@ -38,7 +38,7 @@ spec:
 ```
 Those additional 7 lines of code will create a 75% / 25% distribution between revisions -v1 / -v2.
 
-1. Open a second terminal session and start this command:
+1. Open a second terminal session and start this command, this may still be open from a previous exercise:
    ```
    watch kubectl get pod
    ```

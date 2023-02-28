@@ -203,7 +203,7 @@ The 'spec' part is 'classic' Kubernetes, it describes the location and name of t
     
 ## Scale to Zero
 
-1. Execute the `curl` command from before again 
+1. **Execute the `curl` command from before again** 
 1. Watch the helloworld pod with:
    ```
    watch kubectl get pod
