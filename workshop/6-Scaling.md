@@ -5,7 +5,7 @@ layout: default
 
 # 6 - Knative Auto-Scaling
 
-**Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note** 
+<!-- **Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note** 
 
 To complete this lab, you need `bombardier`, a command line HTTP benchmarking tool. You can find it [here](https://github.com/codesenberg/bombardier/releases){:target="_blank"}. Download the version that goes with your OS into your current directory. Rename it to something simpler, e.g. 
 
@@ -15,7 +15,7 @@ $ mv bombardier-linux-amd64 bombardier
 
 On **bwLehrpool** you can create a directory /home/student/PERSISTENT/bin and move the bombardier executable there. This directory is in the PATH.
 
-**/Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note**
+**/Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note-Note** -->
 
 Scale to zero is an interesting feature but without additional tricks (like pre-started containers or pods, which aren't available in Knative) it can be annoying because users may have to wait until a new pod is started and ready to receive requests. Or it can lead to problems like time-outs in a microservices architecture if a scaled-to-zero service is called by another service and has to be started first and takes some time to start (e.g. traditional Java based service). 
 
