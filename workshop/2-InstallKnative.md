@@ -16,13 +16,13 @@ Installation of Knative is covered in the [Knative Administartion guide](https:/
 1. Install the Knative Serving Custom Resource Definitions (aka CRDs):
 
       ```sh
-      kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.8.3/serving-crds.yaml
+      kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.12.3/serving-crds.yaml
       ```
 
 1. Install the core components of Knative Serving:
 
       ```sh
-      kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.8.3/serving-core.yaml
+      kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.12.3/serving-core.yaml
       ```
 
 ### Installing Kourier as networking layer
@@ -38,7 +38,7 @@ The following commands install Kourier and enable its Knative integration.
 1. Install the Knative Kourier controller:
 
       ```
-      kubectl apply -f https://github.com/knative/net-kourier/releases/download/knative-v1.8.1/kourier.yaml
+      kubectl apply -f https://github.com/knative/net-kourier/releases/download/knative-v1.12.3/kourier.yaml
       ```
 
 1. Configure Knative Serving to use Kourier by default:
@@ -90,12 +90,10 @@ The following commands install Kourier and enable its Knative integration.
 
 Knative ships a simple Kubernetes Job called “default domain” that will configure Knative Serving to use [sslip.io](http://sslip.io/){:target="_blank"} as the default DNS suffix.
 
-*Note:* The default domain used to be 'xip.io' but this suddenly [stopped working](https://github.com/knative/serving/issues/11297).
-
 1. Apply the Kubernetes job:
 
       ```
-      kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.8.3/serving-default-domain.yaml
+      kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.12.3/serving-default-domain.yaml
       ```
 
 2. Create a Minikube tunnel, this requires administrator rights on your workstation. 
@@ -165,7 +163,7 @@ Now that you have learned how to install Knative onto a Kubernetes cluster here 
 
 In the code/install directory is a (Bash) script that will install Knative, Kourier, and one of the two DNS options (sslip.io or example.com):
 
-      `install/install-knative.sh`
+      install/install-knative.sh
 
 This should be especially helpful if you loose your bwLehrPool session and have to start over again. :-)
 

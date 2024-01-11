@@ -1,9 +1,9 @@
 #!/bin/sh
 
 # Knative version to be installed
-knver="knative-v1.8.3"
+knver="knative-v1.12.3"
 # Kourier version to be installed
-kouver="knative-v1.8.1"
+kouver="knative-v1.12.3"
 
 echo ""
 echo "Which DNS will you use, enter 1 o 2:"

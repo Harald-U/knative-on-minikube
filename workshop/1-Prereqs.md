@@ -9,9 +9,9 @@ The instructions will work on Linux and macOS, they have not been tested on Wind
 
 The [Minikube Getting Started](https://minikube.sigs.k8s.io/docs/start/) has detailled instructions on how to install Minikube for the different platforms. 
 
-At the time of this writing, Minikube was at v1.28.0. 
+At the time of this writing, Minikube was at v1.32.0. 
 
-This workshop is **based on Knative v1.8.3**.
+This workshop is **based on Knative v1.12.3**.
 
 ## Step 1 - Install required tools:
 
