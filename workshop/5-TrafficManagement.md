@@ -21,7 +21,7 @@ metadata:
 spec:
   template:
     metadata:
-      name: helloworld-v2
+      name: helloworld-v2-canary
     spec:
       containers:
         - image: docker.io/ibmcom/kn-helloworld
